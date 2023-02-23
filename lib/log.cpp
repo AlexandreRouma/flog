@@ -1,12 +1,18 @@
 #include "log.h"
 #include <inttypes.h>
 
+#ifndef FLOG_ANDROID_TAG
+#define FLOG_ANDROID_TAG    "flog"
+#endif
+
 namespace flog {
     void __log__(Type type, const std::string& fmt, const std::vector<std::string>& args) {
         printf("%d '%s'\n", type, fmt.c_str());
         for (const auto& a : args) {
             printf("-> '%s'\n", a.c_str());
         }
+
+        
     }
 
     std::string __toString__(bool value) {
