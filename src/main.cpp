@@ -18,5 +18,5 @@ int main() {
 
     TestEnum testEn = TEST_2;
 
-    rlog::info("Hello World!", 10, 42.0, "lol", test, (int)testEn, 'A');
+    flog::info("Hello World!", 10, 42.0, "lol", test, (int)testEn, 'A');
 }

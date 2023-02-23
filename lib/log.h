@@ -3,7 +3,7 @@
 #include <string>
 #include <stdint.h>
 
-namespace rlog {
+namespace flog {
     enum Type {
         TYPE_DEBUG,
         TYPE_INFO,

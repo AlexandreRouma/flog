@@ -1,7 +1,7 @@
 #include "log.h"
 #include <inttypes.h>
 
-namespace rlog {
+namespace flog {
     void __log__(Type type, const std::string& fmt, const std::vector<std::string>& args) {
         printf("%d '%s'\n", type, fmt.c_str());
         for (const auto& a : args) {
