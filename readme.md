@@ -1,0 +1,1 @@
+## It's like spdlog except you don't need an entire datacenter to compile it

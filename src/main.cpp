@@ -19,4 +19,6 @@ int main() {
     TestEnum testEn = TEST_2;
 
     flog::info("Hello World!", 10, 42.0, "lol", test, (int)testEn, 'A');
+
+    return 0;
 }
