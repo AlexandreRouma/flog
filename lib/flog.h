@@ -19,13 +19,22 @@ namespace flog {
     std::string __toString__(bool value);
     std::string __toString__(char value);
     std::string __toString__(int8_t value);
-    std::string __toString__(uint8_t value);
     std::string __toString__(int16_t value);
-    std::string __toString__(uint16_t value);
     std::string __toString__(int32_t value);
-    std::string __toString__(uint32_t value);
     std::string __toString__(int64_t value);
+    std::string __toString__(uint8_t value);
+    std::string __toString__(uint16_t value);
+    std::string __toString__(uint32_t value);
     std::string __toString__(uint64_t value);
+    inline std::string __toString__(short value) { return __toString__((int16_t)value); }
+    inline std::string __toString__(int value) { return __toString__((int32_t)value); }
+    inline std::string __toString__(long value) { return __toString__((int64_t)value); }
+    inline std::string __toString__(long long value) { return __toString__((int64_t)value); }
+    inline std::string __toString__(unsigned char value) { return __toString__((uint8_t)value); }
+    inline std::string __toString__(unsigned short value) { return __toString__((uint16_t)value); }
+    inline std::string __toString__(unsigned int value) { return __toString__((uint32_t)value); }
+    inline std::string __toString__(unsigned long value) { return __toString__((uint64_t)value); }
+    inline std::string __toString__(unsigned long long value) { return __toString__((uint64_t)value); }
     std::string __toString__(float value);
     std::string __toString__(double value);
     std::string __toString__(const char* value);
