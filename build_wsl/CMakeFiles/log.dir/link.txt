@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/log.dir/lib/flog.cpp.o CMakeFiles/log.dir/src/main.cpp.o  -o log 

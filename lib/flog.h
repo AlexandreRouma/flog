@@ -13,15 +13,11 @@ namespace flog {
     };
 
     // IO functions
-    void __log__(Type type, const std::string& fmt, const std::vector<std::string>& args);
+    void __log__(Type type, const char* fmt, const std::vector<std::string>& args);
 
-    // Bools
+    // Conversion functions
     std::string __toString__(bool value);
-
-    // Char
     std::string __toString__(char value);
-
-    // Ints
     std::string __toString__(int8_t value);
     std::string __toString__(uint8_t value);
     std::string __toString__(int16_t value);
@@ -30,16 +26,10 @@ namespace flog {
     std::string __toString__(uint32_t value);
     std::string __toString__(int64_t value);
     std::string __toString__(uint64_t value);
-
-    // Floats
     std::string __toString__(float value);
     std::string __toString__(double value);
-
-    // Pointers
     std::string __toString__(const char* value);
     std::string __toString__(const void* value);
-
-    // Classes
     template <class T>
     std::string __toString__(const T& value) {
         return (std::string)value;
@@ -58,29 +48,30 @@ namespace flog {
 
     // Logging functions
     template <typename... Args>
-    void log(Type type, const std::string& fmt, Args... args) {
-        std::vector<std::string> _args(sizeof...(args));
+    void log(Type type, const char* fmt, Args... args) {
+        std::vector<std::string> _args;
+        _args.reserve(sizeof...(args));
         __genArgList__(_args, args...);
         __log__(type, fmt, _args);
     }
 
     template <typename... Args>
-    inline void debug(const std::string& fmt, Args... args) {
+    inline void debug(const char* fmt, Args... args) {
         log(TYPE_DEBUG, fmt, args...);
     }
 
     template <typename... Args>
-    inline void info(const std::string& fmt, Args... args) {
+    inline void info(const char* fmt, Args... args) {
         log(TYPE_INFO, fmt, args...);
     }
 
     template <typename... Args>
-    inline void warn(const std::string& fmt, Args... args) {
+    inline void warn(const char* fmt, Args... args) {
         log(TYPE_WARNING, fmt, args...);
     }
 
     template <typename... Args>
-    inline void error(const std::string& fmt, Args... args) {
+    inline void error(const char* fmt, Args... args) {
         log(TYPE_ERROR, fmt, args...);
     }
 }
