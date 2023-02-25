@@ -1,24 +1,38 @@
 #include <stdio.h>
-#include "log.h"
+#include <string>
+#include "utils/event.h"
+
+void test1(std::string str, int test) {
+    printf("Test1: '%s', %d\n", str.c_str(), test);
+}
+
+void test2(std::string str, int test) {
+    printf("Test2: '%s', %d\n", str.c_str(), test);
+}
 
 class TestClass {
 public:
-    operator std::string() const {
-        return "Bruh I do be cast";
+    TestClass(std::string str) {
+        inst = str;
     }
-};
 
-enum TestEnum {
-    TEST_1,
-    TEST_2
+    void test(std::string str, int test) {
+        printf("[%s]: '%s', %d\n", inst.c_str(), str.c_str(), test);
+    };
+
+private:
+    std::string inst;
 };
 
 int main() {
-    TestClass test;
+    TestClass tc("ClassThing");
 
-    TestEnum testEn = TEST_2;
+    Event<std::string, int> onBruh;
 
-    flog::info("Hello World!", 10, 42.0, "lol", test, (int)testEn, 'A');
+    onBruh.bind(test1);
+    onBruh.bind(test2);
+    onBruh.bind(&TestClass::test, &tc);
+
 
     return 0;
 }

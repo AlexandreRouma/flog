@@ -1,17 +1,39 @@
-#include "log.h"
+#include "flog.h"
 #include <inttypes.h>
+#include <mutex>
+#include <chrono>
 
 #ifndef FLOG_ANDROID_TAG
 #define FLOG_ANDROID_TAG    "flog"
 #endif
 
 namespace flog {
-    void __log__(Type type, const std::string& fmt, const std::vector<std::string>& args) {
-        printf("%d '%s'\n", type, fmt.c_str());
-        for (const auto& a : args) {
-            printf("-> '%s'\n", a.c_str());
-        }
+    std::mutex outMtx;
 
+    const char* TYPE_STR[_TYPE_COUNT] = {
+        "DEBUG",
+        "INFO",
+        "WARN",
+        "ERROR"
+    };
+
+    void __log__(Type type, const std::string& fmt, const std::vector<std::string>& args) {
+        // Get time
+        auto now = std::chrono::system_clock::now();
+        auto nowt = std::chrono::system_clock::to_time_t(now);
+
+        // TODO: This is not threadsafe
+        auto nowc = std::localtime(&nowt);
+        
+        // Create line header
+        char buf[256];
+        sprintf(buf, "[%02d/%02d/%02d %02d:%02d:%02d.%03d] [%s]", nowc->tm_mday, nowc->tm_mon + 1, nowc->tm_year + 1900, nowc->tm_hour, nowc->tm_min, nowc->tm_sec, 0/* TODO */, TYPE_STR[type]);
+
+        // Write to output
+        {
+            std::lock_guard<std::mutex> lck(outMtx);
+            printf("%s %s\n", buf, fmt.c_str());
+        }
         
     }
 

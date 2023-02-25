@@ -5,4 +5,4 @@ file(GLOB_RECURSE SRC "src/*.cpp" "lib/*.cpp")
 
 add_executable(log ${SRC})
 
-target_include_directories(log PRIVATE "lib/")
+target_include_directories(log PRIVATE "lib/" "")

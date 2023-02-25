@@ -8,7 +8,8 @@ namespace flog {
         TYPE_DEBUG,
         TYPE_INFO,
         TYPE_WARNING,
-        TYPE_ERROR
+        TYPE_ERROR,
+        _TYPE_COUNT
     };
 
     // IO functions
@@ -58,7 +59,7 @@ namespace flog {
     // Logging functions
     template <typename... Args>
     void log(Type type, const std::string& fmt, Args... args) {
-        std::vector<std::string> _args;
+        std::vector<std::string> _args(sizeof...(args));
         __genArgList__(_args, args...);
         __log__(type, fmt, _args);
     }
