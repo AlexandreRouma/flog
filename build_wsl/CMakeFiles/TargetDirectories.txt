@@ -1,3 +1,0 @@
-/mnt/c/Users/ryzerth/Documents/Code/flog/build_wsl/CMakeFiles/rebuild_cache.dir
-/mnt/c/Users/ryzerth/Documents/Code/flog/build_wsl/CMakeFiles/edit_cache.dir
-/mnt/c/Users/ryzerth/Documents/Code/flog/build_wsl/CMakeFiles/log.dir
